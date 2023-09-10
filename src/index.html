@@ -3,7 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>goit-js-hw-11</title>
+    <link rel="stylesheet" href="./sass/index.scss" />
   </head>
-  <body></body>
+  <body>
+    <form class="search-form" id="search-form">
+      <input hidden type="number" name="page" value="1" />
+      <input
+        name="q"
+        type="text"
+        name="searchQuery"
+        autocomplete="off"
+        placeholder="Search images..."
+        value=""
+      />
+      <button type="submit">Search</button>
+    </form>
+    <div class="gallery">
+      <!-- Obraz karty -->
+    </div>
+    <button type="button" class="load-more hidden">Load more</button>
+  </body>
+  <script src="./js/index.js" type="module"></script>
 </html>
