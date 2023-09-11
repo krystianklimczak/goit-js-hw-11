@@ -10,6 +10,15 @@ const loadMoreButton = document.querySelector('.load-more');
 let q = '';
 let page = 0;
 
+axios.defaults.baseURL = 'https://pixabay.com/api/';
+axios.defaults.params = {
+  key: '39349329-da0d96b7ff19f00149bd6d266',
+  image_type: 'photo',
+  orientation: 'horizontal',
+  safesearch: true,
+  per_page: 40,
+};
+
 let lightBox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
@@ -42,12 +51,11 @@ async function loadPhotos({ q, page }) {
 
 async function fetchPhotos({ q = '', page = '1' }) {
   const searchParams = new URLSearchParams({
-    ...defaultSearchParams,
     q,
     page,
   });
   try {
-    const response = await axios.get(`${url}?${searchParams}`);
+    const response = await axios.get(`?${searchParams}`);
     const data = await response.data;
 
     return data;
@@ -61,9 +69,9 @@ async function fetchPhotos({ q = '', page = '1' }) {
 }
 
 function drawPhotos(array) {
-  let photosArray = [];
+  // let photosArray = [];
 
-  array.map(photo => {
+  let photos = array.map(photo => {
     const imgBox = document.createElement('a');
     imgBox.classList.add('gallery__item');
     imgBox.setAttribute('href', photo.largeImageURL);
@@ -89,10 +97,11 @@ function drawPhotos(array) {
       </p>
       </div>
       `;
-    photosArray.push(imgBox);
+    // photosArray.push(imgBox);
+    return imgBox;
   });
 
-  gallery.append(...photosArray);
+  gallery.append(...photos);
   loadMoreButton.classList.remove('hidden');
 }
 
